@@ -41,7 +41,7 @@ public class AppController {
   }
 
   private ActionListener dataOrderedByActiveCasesActionListener() {
-    return e -> appView.printCountriesOrderedByActiveCases(
+    return e -> appView.showCountriesOrderedByActiveCases(
         appModel.getCovidDataOrderedByActiveCases());
   }
 

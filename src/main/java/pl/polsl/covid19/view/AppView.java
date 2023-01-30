@@ -8,6 +8,8 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import pl.polsl.covid19.model.CovidData;
 
 /**
@@ -125,7 +127,6 @@ public class AppView {
     resultsPanel.removeAll();
     resultsPanel.add(resultTitleLabel);
     resultsPanel.add(resultLabel);
-
     resultsPanel.updateUI();
   }
 
@@ -141,6 +142,16 @@ public class AppView {
     for (var result : results) {
       System.out.printf("%-30.30s  %-30.30s%n", result.getCountry(), result.getActiveCases());
     }
+  }
+
+  public void showCountriesOrderedByActiveCases(final List<CovidData> results) {
+    Object[][] resultsArray = getObjectsFromList(results);
+    String[] columnNames = {"Country name", "Active cases", "Total deaths", "Total tests"};
+    var resultTable = new JTable(resultsArray, columnNames);
+    var scroll = new JScrollPane(resultTable);
+    resultsPanel.removeAll();
+    resultsPanel.add(scroll);
+    resultsPanel.updateUI();
   }
 
   /**
@@ -161,5 +172,16 @@ public class AppView {
    */
   public void printFeatureYetToBeImplementedMessage() {
     System.out.println("This feature is yet to be implemented");
+  }
+
+  private Object[][] getObjectsFromList(List<CovidData> listData) {
+    Object[][] resultArray = new String[listData.size()][4];
+    for (int i = 0; i < listData.size(); i++) {
+      resultArray[i][0] = listData.get(i).getCountry();
+      resultArray[i][1] = listData.get(i).getActiveCases().toString();
+      resultArray[i][2] = listData.get(i).getTotalDeaths().toString();
+      resultArray[i][3] = listData.get(i).getTotalTests().toString();
+    }
+    return resultArray;
   }
 }
