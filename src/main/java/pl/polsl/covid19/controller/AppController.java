@@ -46,7 +46,7 @@ public class AppController {
   }
 
   private ActionListener numberOfTestsByCountryActionListener() {
-    return e -> appView.printNumberOfTestsPerCountry(appModel.getCovidData());
+    return e -> appView.showNumberOfTestsPerContry(appModel.getCovidData());
   }
 
   private ActionListener pearsonsCoefficientActionListener() {

@@ -131,8 +131,8 @@ public class AppView {
   }
 
   public void showCountriesOrderedByActiveCases(final List<CovidData> results) {
-    Object[][] resultsArray = getObjectsFromList(results);
-    String[] columnNames = {"Country name", "Active cases", "Total deaths", "Total tests"};
+    Object[][] resultsArray = getObjectsFromListActiveCases(results);
+    String[] columnNames = {"Country name", "Active cases"};
     var resultTable = new JTable(resultsArray, columnNames);
     var scroll = new JScrollPane(resultTable);
     resultsPanel.removeAll();
@@ -153,6 +153,16 @@ public class AppView {
     results.forEach(result -> System.out.printf("%-30.30s  %-30.30s%n", result.getCountry(), result.getTotalTests()));
   }
 
+  public void showNumberOfTestsPerContry(final List<CovidData> results) {
+    Object[][] resultsArray = getObjectsFromListTotalCases(results);
+    String[] columnNames = {"Country name", "Total tests"};
+    var resultTable = new JTable(resultsArray, columnNames);
+    var scroll = new JScrollPane(resultTable);
+    resultsPanel.removeAll();
+    resultsPanel.add(scroll);
+    resultsPanel.updateUI();
+  }
+
   /**
    * Prints information about the feature is yet to be implemented.
    */
@@ -160,13 +170,20 @@ public class AppView {
     System.out.println("This feature is yet to be implemented");
   }
 
-  private Object[][] getObjectsFromList(List<CovidData> listData) {
+  private Object[][] getObjectsFromListActiveCases(List<CovidData> listData) {
     Object[][] resultArray = new String[listData.size()][4];
     for (int i = 0; i < listData.size(); i++) {
       resultArray[i][0] = listData.get(i).getCountry();
       resultArray[i][1] = listData.get(i).getActiveCases().toString();
-      resultArray[i][2] = listData.get(i).getTotalDeaths().toString();
-      resultArray[i][3] = listData.get(i).getTotalTests().toString();
+    }
+    return resultArray;
+  }
+
+  private Object[][] getObjectsFromListTotalCases(List<CovidData> listData) {
+    Object[][] resultArray = new String[listData.size()][4];
+    for (int i = 0; i < listData.size(); i++) {
+      resultArray[i][0] = listData.get(i).getCountry();
+      resultArray[i][1] = listData.get(i).getTotalTests().toString();
     }
     return resultArray;
   }
