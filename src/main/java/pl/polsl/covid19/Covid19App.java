@@ -24,7 +24,6 @@ public class Covid19App {
    *             java -jar pl.polsl.Covid19-1.0-SNAPSHOT-jar-with-dependencies.jar 1
    */
   public static void main(String... args) {
-    var appController = new AppController();
-    appController.handleUserInput(args);
+    new AppController();
   }
 }

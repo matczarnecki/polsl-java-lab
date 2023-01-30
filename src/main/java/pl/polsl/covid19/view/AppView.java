@@ -19,7 +19,7 @@ import pl.polsl.covid19.model.CovidData;
 public class AppView {
   private final JPanel titlePanel;
   private final JPanel menuPanel;
-  private final JPanel resultsPanel;
+  private JPanel resultsPanel;
 
   private final ActionListener countryWithHighestNumberOfDeathsActionListener;
   private final ActionListener dataOrderedByActiveCasesActionListener;
@@ -40,13 +40,6 @@ public class AppView {
     resultsPanel = initializeResultsPanel();
 
     initializeMainAppFrame();
-  }
-
-  /**
-   * Prints application menu to the console.
-   */
-  public void printApplicationMenu() {
-
   }
 
   private void initializeMainAppFrame() {
@@ -111,21 +104,29 @@ public class AppView {
   }
 
   private JPanel initializeResultsPanel() {
+    var initialLabel = new JLabel("No results to show");
+    initialLabel.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 20));
+
     var newResultPanel = new JPanel();
     newResultPanel.setBounds(400, 100, 700, 700);
-
+    newResultPanel.add(initialLabel);
 
 //    resultsPanel.setBackground(Color.red);
     return newResultPanel;
   }
 
-  /**
-   * Prints output with a country with the highest number of deaths to the console.
-   *
-   * @param result {@link CovidData} result that will be printed
-   */
-  public void printCountryWithHighestNumberOfDeaths(final CovidData result) {
-    System.out.println("Country with highest number of deaths is: " + result.getCountry());
+  public void showCountryWithHighestNumberOfDeaths(final CovidData result) {
+    var resultTitleLabel = new JLabel("Country with the highest number of deaths is:");
+    resultTitleLabel.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 20));
+
+    var resultLabel = new JLabel(result.getCountry());
+    resultLabel.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 30));
+
+    resultsPanel.removeAll();
+    resultsPanel.add(resultTitleLabel);
+    resultsPanel.add(resultLabel);
+
+    resultsPanel.updateUI();
   }
 
   /**
@@ -160,12 +161,5 @@ public class AppView {
    */
   public void printFeatureYetToBeImplementedMessage() {
     System.out.println("This feature is yet to be implemented");
-  }
-
-  /**
-   * Prints a message about not being able to find requested task.
-   */
-  public void printTaskNotFoundMessage() {
-    System.out.println("Task not found with given number");
   }
 }
