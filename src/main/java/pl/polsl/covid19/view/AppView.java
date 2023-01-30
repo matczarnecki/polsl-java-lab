@@ -7,6 +7,7 @@ import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -19,9 +20,6 @@ import pl.polsl.covid19.model.CovidData;
  * @version 1.2
  */
 public class AppView {
-  private final int APP_WIDTH = 1100;
-  private final int APP_HEIGHT = 600;
-
   private final JPanel titlePanel;
   private final JPanel menuPanel;
   private final JPanel resultsPanel;
@@ -51,7 +49,7 @@ public class AppView {
     var newFrame = new JFrame();
     newFrame.setDefaultCloseOperation(EXIT_ON_CLOSE);
     newFrame.setLayout(null);
-    newFrame.setSize(APP_WIDTH, APP_HEIGHT);
+    newFrame.setSize(1100, 600);
     newFrame.setResizable(false);
 
     newFrame.add(titlePanel);
@@ -65,7 +63,7 @@ public class AppView {
     titleLabel.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 25));
 
     var newTitlePanel = new JPanel();
-    newTitlePanel.setBounds(0, 0, APP_WIDTH, 100);
+    newTitlePanel.setBounds(0, 0, 1100, 100);
     newTitlePanel.add(titleLabel);
 
     return newTitlePanel;
@@ -157,6 +155,10 @@ public class AppView {
     resultsPanel.removeAll();
     resultsPanel.add(infoPanel);
     resultsPanel.updateUI();
+  }
+
+  public void handlePrintErrorPopup(String message) {
+    JOptionPane.showMessageDialog(resultsPanel, message, "Error", JOptionPane.ERROR_MESSAGE);
   }
 
   private Object[][] getObjectsFromListActiveCases(final List<CovidData> listData) {
