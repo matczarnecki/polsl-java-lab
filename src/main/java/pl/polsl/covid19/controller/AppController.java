@@ -1,12 +1,13 @@
 
 package pl.polsl.covid19.controller;
 
+import java.awt.event.ActionListener;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import pl.polsl.covid19.model.AppException;
+import pl.polsl.covid19.model.AppModel;
 import pl.polsl.covid19.model.Task;
 import pl.polsl.covid19.view.AppView;
-import pl.polsl.covid19.model.AppModel;
 
 /**
  * Class will be used to read user input.
@@ -34,7 +35,32 @@ public class AppController {
   /**
    * Instance of app view used for handling view operations.
    */
-  private final AppView appView = new AppView();
+  private final AppView appView;
+
+  public AppController() {
+    appView = new AppView(countryWithHighestNumberOfDeathsActionListener(),
+        dataOrderedByActiveCasesActionListener(),
+        numberOfTestsByCountryActionListener(),
+        pearsonsCoefficientActionListener());
+  }
+
+  private ActionListener countryWithHighestNumberOfDeathsActionListener() {
+    return e -> appView.printCountryWithHighestNumberOfDeaths(
+        appModel.findCovidRecordWithHighestNumberOfDeaths());
+  }
+
+  private ActionListener dataOrderedByActiveCasesActionListener() {
+    return e -> appView.printCountriesOrderedByActiveCases(
+        appModel.getCovidDataOrderedByActiveCases());
+  }
+
+  private ActionListener numberOfTestsByCountryActionListener() {
+    return e -> appView.printNumberOfTestsPerCountry(appModel.getCovidData());
+  }
+
+  private ActionListener pearsonsCoefficientActionListener() {
+    return e -> appView.printFeatureYetToBeImplementedMessage();
+  }
 
   /**
    * Handles input provided by user and selects task to perform.

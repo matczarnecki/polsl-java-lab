@@ -1,7 +1,13 @@
 package pl.polsl.covid19.view;
 
+import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
+import java.awt.Font;
+import java.awt.event.ActionListener;
 import java.util.List;
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import pl.polsl.covid19.model.CovidData;
 
 /**
@@ -12,17 +18,106 @@ import pl.polsl.covid19.model.CovidData;
  */
 public class AppView {
 
+  private final JPanel titlePanel;
+  private final JPanel menuPanel;
+  private final JPanel resultsPanel;
+
+  private final ActionListener countryWithHighestNumberOfDeathsActionListener;
+  private final ActionListener dataOrderedByActiveCasesActionListener;
+  private final ActionListener numberOfTestsByCountryActionListener;
+  private final ActionListener pearsonsCoefficientActionListener;
+
+  public AppView(ActionListener countryWithHighestNumberOfDeathsActionListener,
+                 ActionListener dataOrderedByActiveCasesActionListener,
+                 ActionListener numberOfTestsByCountryActionListener,
+                 ActionListener pearsonsCoefficientActionListener) {
+    this.countryWithHighestNumberOfDeathsActionListener = countryWithHighestNumberOfDeathsActionListener;
+    this.dataOrderedByActiveCasesActionListener = dataOrderedByActiveCasesActionListener;
+    this.numberOfTestsByCountryActionListener = numberOfTestsByCountryActionListener;
+    this.pearsonsCoefficientActionListener = pearsonsCoefficientActionListener;
+
+    titlePanel = initializeTitlePanel();
+    menuPanel = initializeMenuPanel();
+    resultsPanel = initializeResultsPanel();
+
+    initializeMainAppFrame();
+  }
+
   /**
    * Prints application menu to the console.
    */
   public void printApplicationMenu() {
-    System.out.println("# ====================================================== #");
-    System.out.println("Choose the task number and press Enter...");
-    System.out.println("1. Print country with the highest number of deaths.");
-    System.out.println("2. Sort countries by highest number of active cases.");
-    System.out.println("3. Print number of tests per country.");
-    System.out.println("4. Calculate Pearson's correlation.");
-    System.out.println("# ====================================================== #");
+
+  }
+
+  private void initializeMainAppFrame() {
+    var newFrame = new JFrame();
+    newFrame.setDefaultCloseOperation(EXIT_ON_CLOSE);
+    newFrame.setLayout(null);
+    newFrame.setSize(1200, 800);
+    newFrame.setResizable(false);
+
+    newFrame.add(titlePanel);
+    newFrame.add(menuPanel);
+    newFrame.add(resultsPanel);
+    newFrame.setVisible(true);
+  }
+
+  private JPanel initializeTitlePanel() {
+    var titleLabel = new JLabel("Covid-19 Data Analyzer");
+    titleLabel.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 50));
+
+    var newTitlePanel = new JPanel();
+    newTitlePanel.setBounds(0, 0, 1200, 100);
+    newTitlePanel.add(titleLabel);
+
+    //    titlePanel.setBackground(Color.cyan);
+    return newTitlePanel;
+  }
+
+  private JPanel initializeMenuPanel() {
+    var menuTopLabel = new JLabel("Choose a task:");
+    menuTopLabel.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 20));
+
+    var printHighestNoOfCasesButton = new JButton("1. Print a country with the highest number of deaths");
+    printHighestNoOfCasesButton.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 20));
+    printHighestNoOfCasesButton.setBounds(0, 100, 500, 100);
+    printHighestNoOfCasesButton.addActionListener(countryWithHighestNumberOfDeathsActionListener);
+
+    var sortByNumberOfActiveButton = new JButton("2. Sort countries by number of active cases");
+    sortByNumberOfActiveButton.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 20));
+    sortByNumberOfActiveButton.setBounds(0, 200, 500, 100);
+    sortByNumberOfActiveButton.addActionListener(dataOrderedByActiveCasesActionListener);
+
+    var printTestsPerCountryButton = new JButton("3. Print number of tests per country");
+    printTestsPerCountryButton.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 20));
+    printTestsPerCountryButton.setBounds(0, 300, 500, 100);
+    printTestsPerCountryButton.addActionListener(numberOfTestsByCountryActionListener);
+
+    var calculatePearsonsCoefficientButton = new JButton("4. Calculate Pearson's coefficient");
+    calculatePearsonsCoefficientButton.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 20));
+    calculatePearsonsCoefficientButton.setBounds(0, 400, 500, 100);
+    calculatePearsonsCoefficientButton.addActionListener(pearsonsCoefficientActionListener);
+
+    var newMenuPanel = new JPanel();
+    newMenuPanel.setBounds(0, 100, 500, 700);
+    newMenuPanel.add(menuTopLabel);
+    newMenuPanel.add(printHighestNoOfCasesButton);
+    newMenuPanel.add(sortByNumberOfActiveButton);
+    newMenuPanel.add(printTestsPerCountryButton);
+    newMenuPanel.add(calculatePearsonsCoefficientButton);
+
+    //    menuPanel.setBackground(Color.blue);
+    return newMenuPanel;
+  }
+
+  private JPanel initializeResultsPanel() {
+    var newResultPanel = new JPanel();
+    newResultPanel.setBounds(400, 100, 700, 700);
+
+
+//    resultsPanel.setBackground(Color.red);
+    return newResultPanel;
   }
 
   /**
@@ -73,10 +168,5 @@ public class AppView {
    */
   public void printTaskNotFoundMessage() {
     System.out.println("Task not found with given number");
-  }
-
-  public void testSwing() {
-    JFrame frame = new JFrame();
-    frame.setVisible(true);
   }
 }
