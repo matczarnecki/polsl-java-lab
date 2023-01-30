@@ -7,7 +7,7 @@ import java.util.List;
  * Model class used for retrieving and manage covid related data.
  *
  * @author Krzysztof Franków
- * @version 1.1
+ * @version 1.2
  */
 public class AppModel {
 

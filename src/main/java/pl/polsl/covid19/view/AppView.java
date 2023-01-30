@@ -14,7 +14,7 @@ import pl.polsl.covid19.model.CovidData;
  * View class that handles console outputs.
  *
  * @author Krzysztof Franków
- * @version 1.1
+ * @version 1.2
  */
 public class AppView {
 
