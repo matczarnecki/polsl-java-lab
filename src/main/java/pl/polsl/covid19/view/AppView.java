@@ -17,7 +17,6 @@ import pl.polsl.covid19.model.CovidData;
  * @version 1.2
  */
 public class AppView {
-
   private final JPanel titlePanel;
   private final JPanel menuPanel;
   private final JPanel resultsPanel;
