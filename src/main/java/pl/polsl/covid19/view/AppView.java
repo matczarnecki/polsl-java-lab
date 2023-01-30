@@ -140,19 +140,6 @@ public class AppView {
     resultsPanel.updateUI();
   }
 
-  /**
-   * Prints number of tests done in each country.
-   *
-   * @param results collection of {@link CovidData} containing information about
-   *                countries and tests done in each of them
-   */
-  public void printNumberOfTestsPerCountry(final List<CovidData> results) {
-    System.out.println("Number of tests per country:");
-    System.out.printf("%-30.30s  %-30.30s%n", "Country", "Number of tests");
-    System.out.println("-----------------------------------------------------------");
-    results.forEach(result -> System.out.printf("%-30.30s  %-30.30s%n", result.getCountry(), result.getTotalTests()));
-  }
-
   public void showNumberOfTestsPerContry(final List<CovidData> results) {
     Object[][] resultsArray = getObjectsFromListTotalCases(results);
     String[] columnNames = {"Country name", "Total tests"};
@@ -163,11 +150,13 @@ public class AppView {
     resultsPanel.updateUI();
   }
 
-  /**
-   * Prints information about the feature is yet to be implemented.
-   */
-  public void printFeatureYetToBeImplementedMessage() {
-    System.out.println("This feature is yet to be implemented");
+  public void showFeatureYetToBeImplementedMessage() {
+    var infoPanel = new JLabel("This feature is yet to be implemented");
+    infoPanel.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 20));
+
+    resultsPanel.removeAll();
+    resultsPanel.add(infoPanel);
+    resultsPanel.updateUI();
   }
 
   private Object[][] getObjectsFromListActiveCases(List<CovidData> listData) {

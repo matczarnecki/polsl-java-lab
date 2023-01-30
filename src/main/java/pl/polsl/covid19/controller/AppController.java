@@ -50,6 +50,6 @@ public class AppController {
   }
 
   private ActionListener pearsonsCoefficientActionListener() {
-    return e -> appView.printFeatureYetToBeImplementedMessage();
+    return e -> appView.showFeatureYetToBeImplementedMessage();
   }
 }
