@@ -7,7 +7,7 @@ import pl.polsl.covid19.controller.AppController;
  * Main application class that handles application run and initializes app controller.
  *
  * @author Krzysztof Franków
- * @version 1.1
+ * @version 1.2
  */
 public class Covid19App {
 

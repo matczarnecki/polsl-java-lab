@@ -29,6 +29,9 @@ public class AppController {
    */
   private final AppView appView;
 
+  /**
+   * Class constructor that initializes view with action listeners.
+   */
   public AppController() {
     appView = new AppView(countryWithHighestNumberOfDeathsActionListener(),
         dataOrderedByActiveCasesActionListener(),
@@ -36,6 +39,11 @@ public class AppController {
         pearsonsCoefficientActionListener());
   }
 
+  /**
+   * Defines an action listener of finding country with the highest number of deaths.
+   *
+   * @return action listener of finding country with highest number of deaths
+   */
   private ActionListener countryWithHighestNumberOfDeathsActionListener() {
     return e -> {
       try {
@@ -47,6 +55,11 @@ public class AppController {
     };
   }
 
+  /**
+   * Defines an action listener of finding covid data ordered by active cases.
+   *
+   * @return action of finding covid data ordered by active cases
+   */
   private ActionListener dataOrderedByActiveCasesActionListener() {
     return e -> {
       try {
@@ -58,6 +71,11 @@ public class AppController {
     };
   }
 
+  /**
+   * Defines an action listener of finding number of tests by country.
+   *
+   * @return action listener of finding number of tests by country
+   */
   private ActionListener numberOfTestsByCountryActionListener() {
     return e -> {
       try {
@@ -68,6 +86,11 @@ public class AppController {
     };
   }
 
+  /**
+   * Defines an action listener of calculating Pearson's coefficient.
+   *
+   * @return action listener of calculating Pearson's coefficient
+   */
   private ActionListener pearsonsCoefficientActionListener() {
     return e -> {
       try {

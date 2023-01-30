@@ -20,15 +20,50 @@ import pl.polsl.covid19.model.CovidData;
  * @version 1.2
  */
 public class AppView {
+
+  /**
+   * The upper title panel of the application.
+   */
   private final JPanel titlePanel;
+
+  /**
+   * The left panel for placing application menu items.
+   */
   private final JPanel menuPanel;
+
+  /**
+   * The right panel for placing application results.
+   */
   private final JPanel resultsPanel;
 
+  /**
+   * Action listener for finding country with the highest number of deaths.
+   */
   private final ActionListener countryWithHighestNumberOfDeathsActionListener;
+
+  /**
+   * Action listener for finding covid data ordered by active cases.
+   */
   private final ActionListener dataOrderedByActiveCasesActionListener;
+
+  /**
+   * Action listener for finding number of tests by country.
+   */
   private final ActionListener numberOfTestsByCountryActionListener;
+
+  /**
+   * Action listener for calculating Pearson's coefficient.
+   */
   private final ActionListener pearsonsCoefficientActionListener;
 
+  /**
+   * View constructor with action listeners.
+   *
+   * @param countryWithHighestNumberOfDeathsActionListener action listener for finding country with the highest number of deaths
+   * @param dataOrderedByActiveCasesActionListener action listener for finding covid data ordered by active cases
+   * @param numberOfTestsByCountryActionListener action listener for finding number of tests per country
+   * @param pearsonsCoefficientActionListener action listener for finding pearsons coefficient
+   */
   public AppView(ActionListener countryWithHighestNumberOfDeathsActionListener,
                  ActionListener dataOrderedByActiveCasesActionListener,
                  ActionListener numberOfTestsByCountryActionListener,
@@ -45,6 +80,9 @@ public class AppView {
     initializeMainAppFrame();
   }
 
+  /**
+   * Initializes main application frame.
+   */
   private void initializeMainAppFrame() {
     var newFrame = new JFrame();
     newFrame.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -58,6 +96,11 @@ public class AppView {
     newFrame.setVisible(true);
   }
 
+  /**
+   * Initializes application title panel.
+   *
+   * @return initialized app panel
+   */
   private JPanel initializeTitlePanel() {
     var titleLabel = new JLabel("Covid-19 Data Analyzer");
     titleLabel.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 25));
@@ -69,6 +112,11 @@ public class AppView {
     return newTitlePanel;
   }
 
+  /**
+   * Initializes application menu panel.
+   *
+   * @return initialized menu panel
+   */
   private JPanel initializeMenuPanel() {
     var menuTopLabel = new JLabel("Choose a task:");
     menuTopLabel.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 20));
@@ -104,6 +152,11 @@ public class AppView {
     return newMenuPanel;
   }
 
+  /**
+   * Initializes application results panel.
+   *
+   * @return initialized result panel
+   */
   private JPanel initializeResultsPanel() {
     var initialLabel = new JLabel("No results to show");
     initialLabel.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 20));
@@ -115,6 +168,11 @@ public class AppView {
     return newResultPanel;
   }
 
+  /**
+   * Prints country with the highest number of deaths in app GUI.
+   *
+   * @param result country with the highest number of deaths
+   */
   public void showCountryWithHighestNumberOfDeaths(final CovidData result) {
     var resultTitleLabel = new JLabel("Country with the highest number of deaths is:");
     resultTitleLabel.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 20));
@@ -128,6 +186,11 @@ public class AppView {
     resultsPanel.updateUI();
   }
 
+  /**
+   * Prints a table of countries ordered by active covid cases.
+   *
+   * @param results list of ordered covid data
+   */
   public void showCountriesOrderedByActiveCases(final List<CovidData> results) {
     Object[][] resultsArray = getObjectsFromListActiveCases(results);
     String[] columnNames = {"Country name", "Active cases"};
@@ -138,6 +201,11 @@ public class AppView {
     resultsPanel.updateUI();
   }
 
+  /**
+   * Prints a table of countries with tests performed per each.
+   *
+   * @param results list of covid data
+   */
   public void showNumberOfTestsPerContry(final List<CovidData> results) {
     Object[][] resultsArray = getObjectsFromListTotalCases(results);
     String[] columnNames = {"Country name", "Total tests"};
@@ -148,6 +216,9 @@ public class AppView {
     resultsPanel.updateUI();
   }
 
+  /**
+   * Prints information about a feature that is yet to be implemented.
+   */
   public void showFeatureYetToBeImplementedMessage() {
     var infoPanel = new JLabel("This feature is yet to be implemented");
     infoPanel.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 20));
@@ -157,10 +228,21 @@ public class AppView {
     resultsPanel.updateUI();
   }
 
+  /**
+   * Handles printing error message.
+   *
+   * @param message error message
+   */
   public void handlePrintErrorPopup(String message) {
     JOptionPane.showMessageDialog(resultsPanel, message, "Error", JOptionPane.ERROR_MESSAGE);
   }
 
+  /**
+   * Parses data into array of objects, so it could be used with {@link JTable}
+   *
+   * @param listData list of data
+   * @return parsed data
+   */
   private Object[][] getObjectsFromListActiveCases(final List<CovidData> listData) {
     Object[][] resultArray = new String[listData.size()][4];
     for (int i = 0; i < listData.size(); i++) {
@@ -170,6 +252,12 @@ public class AppView {
     return resultArray;
   }
 
+  /**
+   * Parses data into array of objects, so it could be used with {@link JTable}
+   *
+   * @param listData list of data
+   * @return parsed data
+   */
   private Object[][] getObjectsFromListTotalCases(final List<CovidData> listData) {
     Object[][] resultArray = new String[listData.size()][4];
     for (int i = 0; i < listData.size(); i++) {

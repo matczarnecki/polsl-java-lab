@@ -3,6 +3,6 @@
  * The main package class is {@link pl.polsl.covid19.model.AppModel} for handling all possible operations.
  *
  * @author Krzysztof Franków
- * @version 1.0
+ * @version 1.1
  */
 package pl.polsl.covid19.model;
