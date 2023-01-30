@@ -1,7 +1,6 @@
 package pl.polsl.covid19.view;
 
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
-import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -20,9 +19,12 @@ import pl.polsl.covid19.model.CovidData;
  * @version 1.2
  */
 public class AppView {
+  private final int APP_WIDTH = 1100;
+  private final int APP_HEIGHT = 600;
+
   private final JPanel titlePanel;
   private final JPanel menuPanel;
-  private JPanel resultsPanel;
+  private final JPanel resultsPanel;
 
   private final ActionListener countryWithHighestNumberOfDeathsActionListener;
   private final ActionListener dataOrderedByActiveCasesActionListener;
@@ -49,7 +51,7 @@ public class AppView {
     var newFrame = new JFrame();
     newFrame.setDefaultCloseOperation(EXIT_ON_CLOSE);
     newFrame.setLayout(null);
-    newFrame.setSize(1100, 600);
+    newFrame.setSize(APP_WIDTH, APP_HEIGHT);
     newFrame.setResizable(false);
 
     newFrame.add(titlePanel);
@@ -63,7 +65,7 @@ public class AppView {
     titleLabel.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 25));
 
     var newTitlePanel = new JPanel();
-    newTitlePanel.setBounds(0, 0, 1100, 100);
+    newTitlePanel.setBounds(0, 0, APP_WIDTH, 100);
     newTitlePanel.add(titleLabel);
 
     return newTitlePanel;
@@ -157,7 +159,7 @@ public class AppView {
     resultsPanel.updateUI();
   }
 
-  private Object[][] getObjectsFromListActiveCases(List<CovidData> listData) {
+  private Object[][] getObjectsFromListActiveCases(final List<CovidData> listData) {
     Object[][] resultArray = new String[listData.size()][4];
     for (int i = 0; i < listData.size(); i++) {
       resultArray[i][0] = listData.get(i).getCountry();
@@ -166,7 +168,7 @@ public class AppView {
     return resultArray;
   }
 
-  private Object[][] getObjectsFromListTotalCases(List<CovidData> listData) {
+  private Object[][] getObjectsFromListTotalCases(final List<CovidData> listData) {
     Object[][] resultArray = new String[listData.size()][4];
     for (int i = 0; i < listData.size(); i++) {
       resultArray[i][0] = listData.get(i).getCountry();
