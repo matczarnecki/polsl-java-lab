@@ -130,20 +130,6 @@ public class AppView {
     resultsPanel.updateUI();
   }
 
-  /**
-   * Prints output with list of countries ordered by active covid cases to the console.
-   *
-   * @param results collection of {@link CovidData} containing records sorted by number of active cases
-   */
-  public void printCountriesOrderedByActiveCases(final List<CovidData> results) {
-    System.out.println("Countries by highest number of deaths:");
-    System.out.printf("%-30.30s  %-30.30s%n", "Country", "Number of active cases");
-    System.out.println("-----------------------------------------------------------");
-    for (var result : results) {
-      System.out.printf("%-30.30s  %-30.30s%n", result.getCountry(), result.getActiveCases());
-    }
-  }
-
   public void showCountriesOrderedByActiveCases(final List<CovidData> results) {
     Object[][] resultsArray = getObjectsFromList(results);
     String[] columnNames = {"Country name", "Active cases", "Total deaths", "Total tests"};
