@@ -1,6 +1,7 @@
 package pl.polsl.covid19.view;
 
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -48,7 +49,7 @@ public class AppView {
     var newFrame = new JFrame();
     newFrame.setDefaultCloseOperation(EXIT_ON_CLOSE);
     newFrame.setLayout(null);
-    newFrame.setSize(1200, 800);
+    newFrame.setSize(1100, 600);
     newFrame.setResizable(false);
 
     newFrame.add(titlePanel);
@@ -59,13 +60,12 @@ public class AppView {
 
   private JPanel initializeTitlePanel() {
     var titleLabel = new JLabel("Covid-19 Data Analyzer");
-    titleLabel.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 50));
+    titleLabel.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 25));
 
     var newTitlePanel = new JPanel();
-    newTitlePanel.setBounds(0, 0, 1200, 100);
+    newTitlePanel.setBounds(0, 0, 1100, 100);
     newTitlePanel.add(titleLabel);
 
-    //    titlePanel.setBackground(Color.cyan);
     return newTitlePanel;
   }
 
@@ -94,14 +94,13 @@ public class AppView {
     calculatePearsonsCoefficientButton.addActionListener(pearsonsCoefficientActionListener);
 
     var newMenuPanel = new JPanel();
-    newMenuPanel.setBounds(0, 100, 500, 700);
+    newMenuPanel.setBounds(0, 100, 500, 500);
     newMenuPanel.add(menuTopLabel);
     newMenuPanel.add(printHighestNoOfCasesButton);
     newMenuPanel.add(sortByNumberOfActiveButton);
     newMenuPanel.add(printTestsPerCountryButton);
     newMenuPanel.add(calculatePearsonsCoefficientButton);
 
-    //    menuPanel.setBackground(Color.blue);
     return newMenuPanel;
   }
 
@@ -110,10 +109,9 @@ public class AppView {
     initialLabel.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 20));
 
     var newResultPanel = new JPanel();
-    newResultPanel.setBounds(400, 100, 700, 700);
+    newResultPanel.setBounds(500, 100, 600, 500);
     newResultPanel.add(initialLabel);
 
-//    resultsPanel.setBackground(Color.red);
     return newResultPanel;
   }
 
